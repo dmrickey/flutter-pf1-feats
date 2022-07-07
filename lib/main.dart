@@ -1,7 +1,3 @@
-// Copyright 2018 The Flutter team. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:sembast/sembast.dart';
@@ -51,17 +47,6 @@ class _FeatsListState extends State<FeatsList> {
           }
 
           final index = i ~/ 2;
-
-          if (index + 1 > _loaded.length) {
-            return ListTile(
-              title: Center(
-                child: Text(
-                  "loading",
-                  style: _biggerFont,
-                ),
-              ),
-            );
-          }
 
           return ListTile(
             title: Center(

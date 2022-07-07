@@ -42,28 +42,25 @@ class _FeatsListState extends State<FeatsList> {
         itemCount: _loaded.length,
         padding: const EdgeInsets.all(16.0),
         itemBuilder: (context, i) {
-          if (i.isOdd) {
-            return const Divider();
-          }
-
-          final index = i ~/ 2;
-
-          return ListTile(
-            title: Center(
-              child: Text(
-                _loaded[index]['name'],
-                style: _biggerFont,
-              ),
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => FeatDescription(feat: _loaded[index]),
+          return Column(children: [
+            ListTile(
+              title: Center(
+                child: Text(
+                  _loaded[i]['name'],
+                  style: _biggerFont,
                 ),
-              );
-            },
-          );
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FeatDescription(feat: _loaded[i]),
+                  ),
+                );
+              },
+            ),
+            i != _loaded.length - 1 ? const Divider() : const Text(' '),
+          ]);
         },
       ),
     );

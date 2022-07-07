@@ -94,6 +94,7 @@ class _FeatsListState extends State<FeatsList> {
     final recordSnapshot = await store.find(db);
     // should be mapping `snapshot.value` to a real object, but I'm lazy and haven't done that yet
     var loaded = recordSnapshot.map((snapshot) => snapshot.value).toList();
+    loaded.sort((a, b) => "${a['name']}".compareTo("${b['name']}"));
     setState(() {
       _loaded = loaded;
     });

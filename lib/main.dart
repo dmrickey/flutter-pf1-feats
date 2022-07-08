@@ -28,6 +28,10 @@ class FeatsList extends StatefulWidget {
 
 class _FeatsListState extends State<FeatsList> {
   var _loaded = <dynamic>[];
+  var _filtered = <dynamic>[];
+  String _filter = "";
+
+  TextEditingController _textController = TextEditingController();
 
   final _biggerFont = const TextStyle(fontSize: 18);
 
@@ -38,30 +42,56 @@ class _FeatsListState extends State<FeatsList> {
         // actions: [],
         title: const Text('Feat Descriptions'),
       ),
-      body: ListView.builder(
-        itemCount: _loaded.length,
-        padding: const EdgeInsets.all(16.0),
-        itemBuilder: (context, i) {
-          return Column(children: [
-            ListTile(
-              title: Center(
-                child: Text(
-                  _loaded[i]['name'],
-                  style: _biggerFont,
-                ),
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => FeatDescription(feat: _loaded[i]),
+      body: Column(
+        children: [
+          TextField(
+            controller: _textController,
+            decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                hintText: 'Enter a search term',
+                suffixIcon: IconButton(
+                    onPressed: () {
+                      _textController.clear();
+                      setState(() {
+                        _filter = "";
+                      });
+                    },
+                    icon: const Icon(Icons.clear, color: Colors.red))),
+            onChanged: (String value) {
+              setState(() {
+                _filter = value;
+              });
+            },
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: _filtered.length,
+              padding: const EdgeInsets.all(16.0),
+              itemBuilder: (context, i) {
+                return Column(children: [
+                  ListTile(
+                    title: Center(
+                      child: Text(
+                        _filtered[i]['name'],
+                        style: _biggerFont,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              FeatDescription(feat: _filtered[i]),
+                        ),
+                      );
+                    },
                   ),
-                );
+                  i != _filtered.length - 1 ? const Divider() : const Text(' '),
+                ]);
               },
             ),
-            i != _loaded.length - 1 ? const Divider() : const Text(' '),
-          ]);
-        },
+          ),
+        ],
       ),
     );
   }
@@ -96,6 +126,27 @@ class _FeatsListState extends State<FeatsList> {
       _loaded = loaded;
     });
   }
+
+  @override
+  void setState(VoidCallback fn) {
+    fn();
+
+    if (_filter.isEmpty) {
+      _filtered = _loaded;
+    } else {
+      _filtered = _loaded
+          .where((x) =>
+              "${x['name']}".toLowerCase().contains(_filter.toLowerCase()))
+          .toList();
+    }
+
+    super.setState(() {});
+  }
+
+  // @override
+  // void setState(fn) {
+  //   super.setState(fn);
+  // }
 
   /* import feats from previously exported file */
   // Future importFeats() async {

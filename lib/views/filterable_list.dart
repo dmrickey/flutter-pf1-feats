@@ -1,21 +1,20 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import '../models/feat.dart';
+import '../models/list_item.dart';
 import 'description_view.dart';
 
-class FeatsList extends StatefulWidget {
-  const FeatsList({Key? key}) : super(key: key);
+class FilterableList extends StatefulWidget {
+  final List<ListItem> items;
+  final String title;
+
+  const FilterableList({Key? key, required this.items, required this.title})
+      : super(key: key);
 
   @override
-  State<FeatsList> createState() => _FeatsListState();
+  State<FilterableList> createState() => _FilterableListState();
 }
 
-class _FeatsListState extends State<FeatsList> {
-  var _loaded = <Feat>[];
-  var _filtered = <Feat>[];
+class _FilterableListState extends State<FilterableList> {
+  var _filtered = <ListItem>[];
   String _filter = "";
 
   final TextEditingController _textController = TextEditingController();
@@ -26,7 +25,7 @@ class _FeatsListState extends State<FeatsList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Feat Descriptions'),
+        title: Text(widget.title),
       ),
       body: Column(
         children: [
@@ -85,15 +84,8 @@ class _FeatsListState extends State<FeatsList> {
   @override
   void initState() {
     super.initState();
-    initStateAsync();
-  }
-
-  void initStateAsync() async {
-    var loaded = await loadFeats();
-    loaded.sort((a, b) => a.name.compareTo(b.name));
-    setState(() {
-      _loaded = loaded;
-    });
+    // init state based on passed in items
+    setState(() {});
   }
 
   @override
@@ -101,18 +93,13 @@ class _FeatsListState extends State<FeatsList> {
     fn();
 
     if (_filter.isEmpty) {
-      _filtered = _loaded;
+      _filtered = widget.items;
     } else {
-      _filtered = _loaded
+      _filtered = widget.items
           .where((f) => f.name.toLowerCase().contains(_filter.toLowerCase()))
           .toList();
     }
 
     super.setState(() {});
-  }
-
-  Future<List<Feat>> loadFeats() async {
-    var featsString = await rootBundle.loadString('assets/database/feats.json');
-    return json.decode(featsString).map<Feat>((f) => Feat(f)).toList();
   }
 }

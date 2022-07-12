@@ -5,7 +5,7 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = db_pack_reader
+PRODUCT_NAME = flutter_pf1_feats
 
 // The application's bundle identifier
 PRODUCT_BUNDLE_IDENTIFIER = com.example.dbPackReader

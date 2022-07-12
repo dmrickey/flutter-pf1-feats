@@ -1,4 +1,4 @@
-import 'package:db_pack_reader/views/category_view.dart';
+import 'package:flutter_pf1_feats/views/category_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {

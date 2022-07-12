@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.db_pack_reader">
+    package="com.example.flutter_pf1_feats">
    <application
-        android:label="db_pack_reader"
+        android:label="flutter_pf1_feats"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

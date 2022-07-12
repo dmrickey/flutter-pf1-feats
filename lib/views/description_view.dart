@@ -1,4 +1,4 @@
-import 'package:db_pack_reader/models/list_item.dart';
+import 'package:flutter_pf1_feats/models/list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 

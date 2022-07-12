@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:db_pack_reader/models/pf1_class.dart';
+import 'package:flutter_pf1_feats/models/pf1_class.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

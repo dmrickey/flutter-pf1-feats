@@ -15,9 +15,11 @@ class ItemDescription extends StatelessWidget {
           item.name,
         ),
       ),
-      body: Center(
-        child: Html(
-          data: item.description,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Html(
+            data: item.description,
+          ),
         ),
       ),
     );

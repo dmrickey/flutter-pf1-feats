@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:db_pack_reader/models/pf1_class.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -17,6 +18,26 @@ class CategoryView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Pf1 Items')),
       body: ListView(padding: const EdgeInsets.all(8), children: [
+        ListTile(
+          title: Center(
+            child: Text(
+              'Classes',
+              style: _biggerFont,
+            ),
+          ),
+          onTap: () async {
+            var items = await loadClasses();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FilterableList(
+                  items: items,
+                  title: 'Class Descriptions',
+                ),
+              ),
+            );
+          },
+        ),
         ListTile(
           title: Center(
             child: Text(
@@ -59,6 +80,14 @@ class CategoryView extends StatelessWidget {
         ),
       ]),
     );
+  }
+
+  Future<List<Pf1Class>> loadClasses() async {
+    var classJson = await rootBundle.loadString('assets/database/classes.json');
+    List<Pf1Class> classes =
+        json.decode(classJson).map<Pf1Class>((c) => Pf1Class(c)).toList();
+    classes.sort((a, b) => a.name.compareTo(b.name));
+    return classes;
   }
 
   Future<List<Feat>> loadFeats() async {

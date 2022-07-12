@@ -32,16 +32,20 @@ class _FilterableListState extends State<FilterableList> {
           TextField(
             controller: _textController,
             decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                hintText: 'Enter a search term',
-                suffixIcon: IconButton(
+              border: const OutlineInputBorder(),
+              hintText: 'Enter a search term',
+              suffixIcon: Visibility(
+                visible: _filter.isNotEmpty,
+                child: IconButton(
                     onPressed: () {
                       _textController.clear();
                       setState(() {
                         _filter = "";
                       });
                     },
-                    icon: const Icon(Icons.clear, color: Colors.red))),
+                    icon: const Icon(Icons.clear, color: Colors.red)),
+              ),
+            ),
             onChanged: (String value) {
               setState(() {
                 _filter = value;

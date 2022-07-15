@@ -1,4 +1,4 @@
-import 'package:flutter_pf1_feats/views/category_view.dart';
+import 'package:flutter_pf1_feats/views/categories_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'PF1 Info',
-      home: CategoryView(),
+      home: CategoriesPage(),
     );
   }
 }

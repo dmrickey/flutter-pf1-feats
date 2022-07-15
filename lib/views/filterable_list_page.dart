@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import '../models/list_item.dart';
-import 'description_view.dart';
+import 'item_description_page.dart';
 
-class FilterableList extends StatefulWidget {
+class FilterableListPage extends StatefulWidget {
   final List<ListItem> items;
   final String title;
 
-  const FilterableList({Key? key, required this.items, required this.title})
+  const FilterableListPage({Key? key, required this.items, required this.title})
       : super(key: key);
 
   @override
-  State<FilterableList> createState() => _FilterableListState();
+  State<FilterableListPage> createState() => _FilterableListPageState();
 }
 
-class _FilterableListState extends State<FilterableList> {
+class _FilterableListPageState extends State<FilterableListPage> {
   var _filtered = <ListItem>[];
   String _filter = "";
 
@@ -70,7 +70,7 @@ class _FilterableListState extends State<FilterableList> {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              ItemDescription(item: _filtered[i]),
+                              ItemDescriptionPage(item: _filtered[i]),
                         ),
                       );
                     },

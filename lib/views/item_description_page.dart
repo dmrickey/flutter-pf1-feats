@@ -2,8 +2,8 @@ import 'package:flutter_pf1_feats/models/list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
-class ItemDescription extends StatelessWidget {
-  const ItemDescription({super.key, required this.item});
+class ItemDescriptionPage extends StatelessWidget {
+  const ItemDescriptionPage({super.key, required this.item});
 
   final ListItem item;
 
